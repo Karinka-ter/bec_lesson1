@@ -30,6 +30,17 @@ export const videoInputDtoValidation = (data: any,): any[] => {
     }
 
     if (
+        !data.publicationDate ||
+        typeof data.publicationDate !== 'string' ||
+        isNaN(Date.parse(data.publicationDate))
+    ) {
+        errors.push({
+            field: 'publicationDate',
+            message: 'publicationDate must be valid ISO string',
+        });
+    }
+
+    if (
         data.minAgeRestriction !== null &&
         data.minAgeRestriction !== undefined &&
         (typeof data.minAgeRestriction !== 'number' ||

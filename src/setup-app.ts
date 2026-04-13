@@ -37,6 +37,7 @@ export const setupApp = (app: Express) => {
             ...req.body,
             id: db.videos.length ? db.videos[db.videos.length - 1].id + 1 : 1,
             canBeDownloaded: req.body.canBeDownloaded ?? false,
+            minAgeRestriction: req.body.minAgeRestriction ?? null,
             createdAt: now,
             publicationDate: req.body.publicationDate || new Date(now.getTime() + 24 * 60 * 60 * 1000),
         };
@@ -76,6 +77,11 @@ export const setupApp = (app: Express) => {
         db.videos.splice(index, 1);
         res.sendStatus(HttpStatus.NoContent);
     });
+
+    app.delete('testing/all-data', (req, res) => {
+        db.videos = [];
+        return res.sendStatus(HttpStatus.NoContent);
+    })
 
     return app;
 };

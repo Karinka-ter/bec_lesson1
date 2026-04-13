@@ -20,7 +20,17 @@ export const videoInputDtoValidation = (data: any,): any[] => {
     }
 
     if (
-        data.minAgeRestriction !== undefined &&
+        data.canBeDownloaded !== undefined &&
+        typeof data.canBeDownloaded !== 'boolean'
+    ) {
+        errors.push({
+            field: 'canBeDownloaded',
+            message: 'canBeDownloaded must be boolean',
+        });
+    }
+
+    if (
+        data.minAgeRestriction !== null &&
         (typeof data.minAgeRestriction !== 'number' ||
             data.minAgeRestriction < 1 ||
             data.minAgeRestriction > 18)

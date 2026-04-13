@@ -50,13 +50,13 @@ export const setupApp = (app: Express) => {
     app.put("/videos/:id", (req, res) => {
         const video = db.videos.find(v => v.id === Number(req.params.id));
 
+        if (!video) {
+            return res.sendStatus(HttpStatus.NotFound);
+        }
+
         const errors = videoInputDtoValidation(req.body);
         if (errors.length > 0) {
             return res.status(HttpStatus.BadRequest).send({ errorsMessages: errors });
-        }
-
-        if (!video) {
-            return res.sendStatus(HttpStatus.NotFound);
         }
 
         video.title = req.body.title;

@@ -78,7 +78,7 @@ export const setupApp = (app: Express) => {
         res.sendStatus(HttpStatus.NoContent);
     });
 
-    app.delete('testing/all-data', (req, res) => {
+    app.delete('/testing/all-data', (req, res) => {
         db.videos = [];
         return res.sendStatus(HttpStatus.NoContent);
     })

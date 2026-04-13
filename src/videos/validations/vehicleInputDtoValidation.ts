@@ -31,6 +31,7 @@ export const videoInputDtoValidation = (data: any,): any[] => {
 
     if (
         data.minAgeRestriction !== null &&
+        data.minAgeRestriction !== undefined &&
         (typeof data.minAgeRestriction !== 'number' ||
             data.minAgeRestriction < 1 ||
             data.minAgeRestriction > 18)

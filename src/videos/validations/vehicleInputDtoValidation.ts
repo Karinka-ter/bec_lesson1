@@ -30,8 +30,8 @@ export const videoInputDtoValidation = (data: any,): any[] => {
     }
 
     if (
-        !data.publicationDate ||
-        typeof data.publicationDate !== 'string' ||
+        data.publicationDate !== undefined &&
+        data.publicationDate !== null &&
         isNaN(Date.parse(data.publicationDate))
     ) {
         errors.push({
